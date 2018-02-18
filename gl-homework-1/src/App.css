@@ -1,41 +1,23 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
   padding: 20px;
-  color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
+.movieSummary p {
+  color: gray;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.movieSummary b {
-  display: block;
-  min-height: 20px;
-  white-space: pre-line;
+.movieSummary p.selected {
+  color: #000;
 }
 
 .movieSummary b i {
   font-weight: normal;
   opacity: .5;
+}
+
+.movieSummary img {
+  max-width: 50px;
+  display: block;
 }
 
 .movieForm label {
@@ -48,4 +30,10 @@
 
 .movieForm .formField textarea {
   min-height: 100px;
+}
+
+.movieForm .formField img {
+  max-width: 100px;
+  display: block;
+  margin-top: 10px;
 }
