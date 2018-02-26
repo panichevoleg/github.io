@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { updateFilm, selectFilm } from './store';
 
 const ratingOptions = [1, 2, 3, 4, 5];
 
@@ -32,6 +34,9 @@ class Form extends Component {
   }
   
   initState() {
+    if (!this.props.film) {
+      return false;
+    }
     const { name, description, rating, image } = this.props.film;
     this.setState({
       name,
@@ -71,10 +76,11 @@ class Form extends Component {
 
   render() {
     const { name, description, rating, image } = this.state;
-    const { updateFilm } = this.props;
+    const { updateFilm, selectedId } = this.props;
 
     return (
-      <form className="movieForm" onSubmit={(e) => updateFilm(e, name, description, rating, image)}>
+      <form className="movieForm" onSubmit={(e) => updateFilm(e, selectedId, { name, description, rating, image })}>
+        <input type="hidden" name="selectedId" value={selectedId} />
         <div className="formField">
           <label htmlFor="name">Name:</label>
           <input name="name" id="name" onChange={this.onChangeField} value={name} />
@@ -109,4 +115,17 @@ class Form extends Component {
   
 }
 
-export default Form;
+const mapStateToProps = state => ({
+  film: state.films[state.selectedId],
+  selectedId: state.selectedId
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateFilm: (e, id, data) => {
+    e.preventDefault();
+    dispatch(updateFilm(id, data));
+    dispatch(selectFilm(null));
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

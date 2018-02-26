@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { selectFilm } from './store';
 
 class List extends Component {
   
@@ -22,4 +24,13 @@ class List extends Component {
   
 }
 
-export default List;
+const mapStateToProps = state => ({
+  films: state.films,
+  selectedId: state.selectedId
+})
+
+const mapDispatchToProps = dispatch => ({
+  selectFilm: id => dispatch(selectFilm(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

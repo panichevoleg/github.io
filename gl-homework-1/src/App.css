@@ -4,6 +4,7 @@
 
 .movieSummary p {
   color: gray;
+  cursor: pointer;
 }
 
 .movieSummary p.selected {
